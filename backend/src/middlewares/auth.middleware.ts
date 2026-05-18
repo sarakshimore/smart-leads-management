@@ -3,10 +3,10 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.model";
 
 interface JwtPayload {
-  userId?: string;
-  id?: string;
-  email?: string;
-  role?: "admin" | "sales";
+  userId: string;
+  email: string;
+  role: "admin" | "sales";
+  id?: string; // legacy fallback for older tokens
 }
 
 export const protect = async (
@@ -27,7 +27,7 @@ export const protect = async (
       process.env.JWT_SECRET as string
     ) as JwtPayload;
 
-    const resolvedUserId = decoded.userId ?? decoded.id;
+    const resolvedUserId = decoded.userId || decoded.id;
 
     if (!resolvedUserId) {
       res.status(401).json({ message: "Invalid token payload" });
