@@ -50,17 +50,9 @@ const Dashboard = () => {
 
     const exportCSV = async () => {
         try {
-            const token = localStorage.getItem("token");
-
-            const response = await API.get(
-                "http://localhost:5000/api/leads/export/csv",
-                {
-                    responseType: "blob",
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                }
-            );
+            const response = await API.get("/leads/export/csv", {
+                responseType: "blob",
+            });
 
             const url = window.URL.createObjectURL(
                 new Blob([response.data])

@@ -117,6 +117,18 @@ Frontend API base defaults to:
 http://localhost:5000/api
 ```
 
+Create `frontend/.env` (or set Vercel env var):
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+For production (Render backend + Vercel frontend), set:
+
+```env
+VITE_API_URL=https://<your-render-backend-domain>/api
+```
+
 ## Local Development
 
 ### Install
